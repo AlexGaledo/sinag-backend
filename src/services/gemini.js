@@ -4,6 +4,7 @@ const ai = new GoogleGenAI({});
 
 const sysin = `
 You are a model that analyzes electricity bills and creates a baseline for saved energy tracker applications.
+
 Return a JSON object with the following keys:
 month: string (the month of the bill)
 rate_this_month: number (the rate for this month in kWh)

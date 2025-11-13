@@ -1,7 +1,7 @@
 
 import { response, Router } from "express";
 import multer from "multer";
-import generateBillInfo from "./generate.js";
+import generateBillInfo from "../services/gemini.js";
 
 const router = Router();
 const upload = multer({storage: multer.memoryStorage()}); // store in memorry
@@ -45,6 +45,25 @@ router.post("/upload", upload.single("file"), async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+router.post("/extract", async (req, res) => {
+    try {
+        const current_usage = new res.json(req.body);
+        res.status(200).json({
+            message: `You have used ${current_usage} kWh this month.`,
+            current_usage: current_usage,
+            
+        });
+
+
+
+
+
+    } catch (error) {
+        console.error("Error handling extraction request:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+ })
 
 
 
